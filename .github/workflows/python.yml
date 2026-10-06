@@ -28,6 +28,10 @@ jobs:
       - name: install dependencies
         run: pipenv install --dev
 
+      - name: check CLI imports resolve
+        # Fails if the Pipfile is missing a module imported by the CLI (github/ghas-jira-integration#52)
+        run: pipenv run ./gh2jira --help
+
       - name: run black formatter
         run: pipenv run black --check .
 
